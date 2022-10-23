@@ -3,11 +3,8 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const Title = styled.h1`
-  color: ${(props) => props.theme.fontColor};
-`;
 
 const Container = styled.div`
   display: flex;
@@ -36,36 +33,41 @@ const TopBox = styled(WhiteBox)`
     justify-items: center;
     flex-direction: column;
     align-items: center;
-
-    input {
-      width: 100%;
-      border-radius: 3px;
-      padding: 7px;
-      background-color: #fafafa;
-      border: 0.5px solid rgb(219, 219, 219);
-      margin-top: 5px;
-      box-sizing: border-box;
-      &::placeholder {
-        font-size: 12px;
-      }
-      &:last-child {
-        border: none;
-        margin-top: 12px;
-        background-color: #0095f6;
-        color: white;
-        text-align: center;
-        padding: 8px 0px;
-        font-weight: 600;
-      }
-    }
   }
 `;
+
+const Input = styled.input`
+  width: 100%;
+  border-radius: 3px;
+  padding: 7px;
+  background-color: #fafafa;
+  border: 0.5px solid ${(props) => props.theme.borderColor};
+  margin-top: 5px;
+  box-sizing: border-box;
+  &::placeholder {
+    font-size: 12px;
+  }
+`;
+
+const Button = styled.input`
+  border: none;
+  margin-top: 12px;
+  background-color: ${(props) => props.theme.accent};
+  color: white;
+  text-align: center;
+  padding: 8px 0px;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 3px;
+`;
+
 const BottomBox = styled(WhiteBox)`
   padding: 20px 0px;
   text-align: center;
   a {
     font-weight: 600;
-    color: #0095f6;
+    margin-left: 5px;
+    color: ${(props) => props.theme.accent};
   }
 `;
 
@@ -84,7 +86,7 @@ const Separator = styled.div`
   div {
     width: 100%;
     height: 1px;
-    background-color: #8e8e8e;
+    background-color: rgb(219, 219, 219);
   }
   span {
     width: 70px;
@@ -112,9 +114,9 @@ function Login() {
             <FontAwesomeIcon icon={faInstagram} size="3x" />
           </div>
           <form>
-            <input type="text" placeholder="전화번호,사용자 이름 또는 이메일" />
-            <input type="password" placeholder="비밀번호" />
-            <input type="submit" value="로그인" />
+            <Input type="text" placeholder="사용자 이름" />
+            <Input type="password" placeholder="비밀번호" />
+            <Button type="submit" value="로그인" />
           </form>
           <Separator>
             <div></div>
@@ -128,7 +130,7 @@ function Login() {
         </TopBox>
         <BottomBox>
           <span>계정이 없으신가요?</span>
-          <a href="#">가입하기</a>
+          <Link to="/sign-up">가입하기</Link>
         </BottomBox>
       </Wrapper>
     </Container>
