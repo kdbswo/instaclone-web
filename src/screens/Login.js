@@ -24,7 +24,7 @@ function Login() {
   return (
     <AuthLayout>
       <FormBox>
-        <div>
+        <div style={{ marginBottom: 20 }}>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
         <form>
@@ -33,7 +33,6 @@ function Login() {
           <Button type="submit" value="로그인" />
         </form>
         <Separator />
-
         <FacebookLogin>
           <FontAwesomeIcon icon={faFacebookSquare} />
           <span>Facebook으로 로그인</span>
