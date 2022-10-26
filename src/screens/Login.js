@@ -3,6 +3,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import styled from "styled-components";
 import BottomBox from "../components/auth/BottmBox";
 import Button from "../components/auth/Button";
@@ -21,16 +22,41 @@ const FacebookLogin = styled.div`
 `;
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const onUsernameChange = (event) => {
+    setUsernameError("");
+    setUsername(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (username === "") {
+      setUsernameError("Not empty pls.");
+    }
+    if (username.length < 10) {
+      setUsernameError("too short");
+    }
+  };
   return (
     <AuthLayout>
       <FormBox>
         <div style={{ marginBottom: 20 }}>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
-        <form>
-          <Input type="text" placeholder="사용자 이름" />
+        <form onSubmit={handleSubmit}>
+          {usernameError}
+          <Input
+            onChange={onUsernameChange}
+            value={username}
+            type="text"
+            placeholder="사용자 이름"
+          />
           <Input type="password" placeholder="비밀번호" />
-          <Button type="submit" value="로그인" />
+          <Button
+            type="submit"
+            value="로그인"
+            disabled={username === "" && username.length < 10}
+          />
         </form>
         <Separator />
         <FacebookLogin>

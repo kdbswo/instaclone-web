@@ -34,6 +34,7 @@ function SignUp() {
           <Button type="submit" value="Facebook으로 로그인" />
         </form>
         <Separator />
+        <div style={{ marginTop: -15 }} />
         <form>
           <Input type="text" placeholder="이메일 주소" />
           <Input type="password" placeholder="성명" />
