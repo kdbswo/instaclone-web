@@ -11,6 +11,7 @@ import AuthLayout from "../components/auth/Container";
 import FormBox from "../components/auth/FormBox";
 import Input from "../components/auth/Input";
 import Separator from "../components/auth/Separator";
+import PageTitle from "../components/PageTitle";
 import routes from "../routes";
 
 const FacebookLogin = styled.div`
@@ -39,24 +40,15 @@ function Login() {
   };
   return (
     <AuthLayout>
+      <PageTitle title="Login" />
       <FormBox>
         <div style={{ marginBottom: 20 }}>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
-        <form onSubmit={handleSubmit}>
-          {usernameError}
-          <Input
-            onChange={onUsernameChange}
-            value={username}
-            type="text"
-            placeholder="사용자 이름"
-          />
+        <form>
+          <Input type="text" placeholder="사용자 이름" />
           <Input type="password" placeholder="비밀번호" />
-          <Button
-            type="submit"
-            value="로그인"
-            disabled={username === "" && username.length < 10}
-          />
+          <Button type="submit" value="로그인" />
         </form>
         <Separator />
         <FacebookLogin>
