@@ -52,6 +52,10 @@ function Login() {
     clearErrors,
   } = useForm({
     mode: "onChange",
+    defaultValues: {
+      username: location?.state?.username || "",
+      password: location?.state?.password || "",
+    },
   });
   const onCompleted = (data) => {
     const {
