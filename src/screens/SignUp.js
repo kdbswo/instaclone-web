@@ -13,6 +13,7 @@ import Separator from "../components/auth/Separator";
 import PageTitle from "../components/PageTitle";
 import { FatLink } from "../components/shared";
 import routes from "../routes";
+import FormError from "../components/auth/FormError";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -54,7 +55,9 @@ function SignUp() {
       createAccount: { ok, error },
     } = data;
     if (!ok) {
-      return;
+      return setError("result", {
+        message: error,
+      });
     }
     history.push(routes.home, {
       message: "Account created. Please log in",
@@ -65,7 +68,15 @@ function SignUp() {
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
   });
-  const { register, handleSubmit, errors, formState, getValues } = useForm({
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState,
+    getValues,
+    setError,
+    clearErrors,
+  } = useForm({
     mode: "onChange",
   });
   const onSubmitValid = (data) => {
@@ -77,6 +88,9 @@ function SignUp() {
         ...data,
       },
     });
+  };
+  const clearLoginError = () => {
+    clearErrors("result");
   };
 
   return (
@@ -100,12 +114,14 @@ function SignUp() {
             name="firstName"
             type="text"
             placeholder="First Name"
+            onChange={clearLoginError}
           />
           <Input
             ref={register}
             name="lastName"
             type="text"
             placeholder="Last Name"
+            onChange={clearLoginError}
           />
           <Input
             ref={register({
@@ -114,15 +130,23 @@ function SignUp() {
             name="email"
             type="text"
             placeholder="Email"
+            onChange={clearLoginError}
           />
           <Input
             ref={register({
               required: "Username is required.",
+              minLength: {
+                value: 5,
+                message: "Username should be longer than 5 chars",
+              },
             })}
             name="username"
             type="text"
             placeholder="Username"
+            hasError={Boolean(errors?.username?.message)}
+            onChange={clearLoginError}
           />
+          <FormError message={errors?.username?.message} />
           <Input
             ref={register({
               required: "Password is required.",
@@ -130,13 +154,17 @@ function SignUp() {
             name="password"
             type="password"
             placeholder="password"
+            hasError={Boolean(errors?.password?.message)}
+            onChange={clearLoginError}
           />
+          <FormError message={errors?.password?.message} />
           <Button
             type="submit"
             value={loading ? "loading..." : "Sign up"}
             disabled={!formState.isValid || loading}
           />
         </form>
+        <FormError message={errors?.result?.message} />
       </FormBox>
       <BottomBox
         cta="계정이 있으신가요?"
