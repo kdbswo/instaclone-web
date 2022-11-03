@@ -5,9 +5,9 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { isLoggedInVar } from "../../apollo";
-import useUser from "../../hooks/useUser";
-import routes from "../../routes";
+import { isLoggedInVar } from "../apollo";
+import useUser from "../hooks/useUser";
+import routes from "../routes";
 
 const SHeader = styled.header`
   width: 100%;
