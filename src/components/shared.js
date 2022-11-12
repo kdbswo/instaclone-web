@@ -11,3 +11,7 @@ export const FatLink = styled.span`
   color: rgb(142, 142, 142);
   text-align: center;
 `;
+
+export const FatText = styled.span`
+  font-weight: 600;
+`;
