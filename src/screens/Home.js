@@ -25,7 +25,6 @@ export const FEED_QUERY = gql`
 function Home() {
   const { data } = useQuery(FEED_QUERY);
   const history = useHistory();
-  console.log(data);
   return (
     <div>
       <PageTitle title="Home" />
