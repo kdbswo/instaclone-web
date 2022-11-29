@@ -1,5 +1,4 @@
 import React from "react";
-import sanitizeHtml from "sanitize-html";
 import styled from "styled-components";
 import { FatText } from "../shared";
 import PropTypes from "prop-types";
