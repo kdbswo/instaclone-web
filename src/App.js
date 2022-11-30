@@ -3,12 +3,12 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { client, darkModeVar, isLoggedInVar } from "./apollo";
-import Header from "./components/Headers";
 import Layout from "./components/Layout";
 import routes from "./routes";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import NotFound from "./screens/NotFound";
+import Profile from "./screens/Profile";
 import SignUp from "./screens/SignUp";
 import { darkTheme, GlobalStyles, lightTheme } from "./styles";
 
@@ -36,6 +36,9 @@ function App() {
                   <SignUp />
                 </Route>
               ) : null}
+              <Route path={`/users/:username`}>
+                <Profile />
+              </Route>
               <Route>
                 <NotFound />
               </Route>
